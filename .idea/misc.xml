@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable/btn_green.xml" value="0.193" />
+        <entry key="app/src/main/res/drawable/btn_grey.xml" value="0.1645" />
+        <entry key="app/src/main/res/drawable/circle_green.xml" value="0.163" />
+        <entry key="app/src/main/res/drawable/circle_white.xml" value="0.163" />
+        <entry key="app/src/main/res/drawable/circle_white50.xml" value="0.163" />
+        <entry key="app/src/main/res/drawable/circle_yellow.xml" value="0.163" />
+        <entry key="app/src/main/res/drawable/round_green.xml" value="0.163" />
+        <entry key="app/src/main/res/drawable/round_grey.xml" value="0.163" />
+        <entry key="app/src/main/res/layout/activity_gallery.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.2703140258789063" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/activity_monitoring.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.10156336245329478" />
+        <entry key="app/src/main/res/layout/activity_setting.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.28804347826086957" />
+        <entry key="app/src/main/res/layout/activity_start.xml" value="0.14907407407407408" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

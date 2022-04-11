@@ -7,7 +7,7 @@
     tools:context=".Monitoring">
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/btn_goBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -31,21 +31,8 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.039"
-        app:layout_constraintStart_toEndOf="@+id/imageButton"
+        app:layout_constraintStart_toEndOf="@+id/btn_goBack"
         app:layout_constraintTop_toTopOf="parent"
 
         />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/Smenu"
-        android:layout_width="414dp"
-        android:layout_height="70dp"
-        android:layout_gravity="bottom"
-        app:backgroundTint="#ffffff"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/smenu" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

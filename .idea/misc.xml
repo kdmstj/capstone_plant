@@ -13,12 +13,18 @@
         <entry key="app/src/main/res/drawable/round_grey.xml" value="0.163" />
         <entry key="app/src/main/res/layout/activity_gallery.xml" value="0.15520833333333334" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.2703140258789063" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.30678710937500003" />
         <entry key="app/src/main/res/layout/activity_monitoring.xml" value="0.15520833333333334" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.10156336245329478" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.15520833333333334" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.28804347826086957" />
         <entry key="app/src/main/res/layout/activity_start.xml" value="0.14907407407407408" />
+        <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.24895833333333334" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.19438018798828127" />
+        <entry key="app/src/main/res/layout/fragment_monitoring.xml" value="0.24895833333333334" />
+        <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/menu/home.xml" value="0.24895833333333334" />
+        <entry key="app/src/main/res/menu/smenu.xml" value="0.24895833333333334" />
       </map>
     </option>
   </component>

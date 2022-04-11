@@ -29,6 +29,16 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        btn_Register = findViewById(R.id.btn_Register);
+        btn_Register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
 
 
 

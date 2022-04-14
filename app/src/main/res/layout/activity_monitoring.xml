@@ -7,7 +7,7 @@
     tools:context=".Monitoring">
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/btn_goBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -31,7 +31,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.039"
-        app:layout_constraintStart_toEndOf="@+id/imageButton"
+        app:layout_constraintStart_toEndOf="@+id/btn_goBack"
         app:layout_constraintTop_toTopOf="parent"
 
         />

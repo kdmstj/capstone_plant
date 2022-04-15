@@ -41,6 +41,7 @@ public class SettingActivity extends AppCompatActivity {
 
                 String plant_name = et_plantName.getText().toString();
                 String plant_info = et_plantInfo.getText().toString();
+                String plant_owner = user_id;
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
@@ -49,7 +50,7 @@ public class SettingActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             boolean success = jsonObject.getBoolean("success");
                             if(success){
-                                Toast.makeText(getApplicationContext(), "식물 정보 등록에 성공하였습니다.",Toast.LENGTH_SHORT);
+                                Toast.makeText(getApplicationContext(), "식물 정보 등록에 성공하였습니다.",Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(SettingActivity.this,MainActivity.class);
                                 startActivity(intent);
 
@@ -60,7 +61,7 @@ public class SettingActivity extends AppCompatActivity {
                     }
                 };
                 // 서버로 Volley를 이용해서 요청을 함.
-                SettingRequest settingRequest = new SettingRequest(plant_name,plant_info,user_id, responseListener);
+                SettingRequest settingRequest = new SettingRequest(plant_name,plant_info,plant_owner, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(SettingActivity.this);
                 queue.add(settingRequest);
             }

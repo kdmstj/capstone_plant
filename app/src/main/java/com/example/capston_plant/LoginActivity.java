@@ -51,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (success) { // 로그인에 성공한 경우
                             String user_id = jsonObject.getString("user_id");
                             Toast.makeText(getApplicationContext(),"로그인에 성공하였습니다.",Toast.LENGTH_SHORT).show();
+                            check_setting();
                             Intent intent = new Intent(LoginActivity.this, SettingActivity.class);
                             intent.putExtra("user_id", user_id);
                             startActivity(intent);
@@ -77,20 +78,14 @@ public class LoginActivity extends AppCompatActivity {
 
 
         btn_goRegister.setOnClickListener(view -> {
-
-
-
-
-
-
-
-
             Intent intent3 = new Intent(LoginActivity.this,RegisterActivity.class);
             startActivity(intent3);
             finish();
         });
 
+    }
 
+    private static void check_setting(){
 
     }
 }

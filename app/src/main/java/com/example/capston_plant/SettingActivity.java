@@ -52,6 +52,7 @@ public class SettingActivity extends AppCompatActivity {
                             if(success){
                                 Toast.makeText(getApplicationContext(), "식물 정보 등록에 성공하였습니다.",Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(SettingActivity.this,MainActivity.class);
+                                intent.putExtra("plant_owner",user_id);
                                 startActivity(intent);
 
                             }

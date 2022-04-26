@@ -3,7 +3,10 @@ package com.example.capston_plant;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -25,9 +28,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent intent = getIntent();
+        String plant_owner = intent.getStringExtra("plant_owner");
+
 
         //초기 세팅
         init();
+
+        Bundle bundle1 = new Bundle();
+        bundle1.putString("plant_owner",plant_owner);
 
 
         //bottomNavigation의 아이콘을 선택했을 때 원하는 프레그먼트가 띄어질 수 있도록 리스너를 추가한다.
@@ -37,9 +46,11 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (item.getItemId()) {
                     case R.id.tab1: {
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.main_layout, new HomeFragment())
-                                .commit();
+                        FragmentManager fm = getSupportFragmentManager();
+                        FragmentTransaction fmt = fm.beginTransaction();
+                        //HomeFragment.setArguments(bundle1);
+                        fmt.replace(R.id.main_layout, new HomeFragment()).commit();
+
                         return true;
                     }
                     case R.id.tab2: {
@@ -65,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+
 
 
 

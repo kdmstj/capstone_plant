@@ -69,6 +69,7 @@
         android:layout_marginTop="16dp"
         android:hint="식물 이름을 입력해주세요."
         android:inputType="textEmailAddress"
+        android:minHeight="48dp"
         android:textColor="#000000"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -97,6 +98,7 @@
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,15 +110,27 @@
         android:layout_height="56dp"
         android:layout_marginTop="64dp"
         android:text="저장"
-        android:background="@drawable/btn_grey"
-        android:textColor="#7EC341"
+        android:background="@drawable/btn_green"
+        android:textColor="#ffffff"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_plantInfo" />
 
-
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="300dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="128dp"
+        android:background="@drawable/btn_grey"
+        android:text="로그아웃"
+        android:textColor="#7EC341"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_plantInfo" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

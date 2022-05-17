@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -23,13 +25,20 @@ public class MainActivity extends AppCompatActivity {
     GalleryFragment galleryFragment;
     SettingFragment settingFragment;
 
+    String plant_owner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = getIntent();
-        String plant_owner = intent.getStringExtra("plant_owner");
+        //SharedPreferences 에서 정보 가져오기
+        SharedPreferences auto = getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
+        plant_owner = auto.getString("user_id",null);
+        System.out.println("plant_owner"+plant_owner);
+
+        //Intent intent = getIntent();
+        //String plant_owner = intent.getStringExtra("plant_owner");
 
 
         //초기 세팅

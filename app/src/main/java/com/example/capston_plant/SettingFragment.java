@@ -1,6 +1,7 @@
 package com.example.capston_plant;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,7 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 
 public class SettingFragment extends Fragment {
@@ -21,6 +24,11 @@ public class SettingFragment extends Fragment {
     ImageButton btn_goBack;
     Button btn_Logout;
 
+    String plant_owner;
+    String plant_name;
+    String plant_info;
+    EditText et_plantName;
+    EditText et_plantInfo;
 
 
 
@@ -29,8 +37,8 @@ public class SettingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         view = inflater.inflate(R.layout.fragment_setting, container, false);
+
 
         btn_goBack = view.findViewById(R.id.btn_goBack);
         btn_goBack.setOnClickListener(new View.OnClickListener() {

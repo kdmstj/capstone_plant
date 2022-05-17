@@ -36,11 +36,11 @@ import java.net.URL;
 public class SettingActivity extends AppCompatActivity {
 
     Button btn_save;
+    EditText et_plantId;
     EditText et_plantName;
     EditText et_plantInfo;
     String plant_owner;
 
-    final static private String url = "http://112.170.208.72:8920/checksetting.php";
 
 
     @Override
@@ -91,6 +91,7 @@ public class SettingActivity extends AppCompatActivity {
 
         et_plantName = findViewById(R.id.et_plantName);
         et_plantInfo = findViewById(R.id.et_plantInfo);
+        et_plantId =  findViewById(R.id.et_plantID);
 
 
         btn_save = findViewById(R.id.btn_save);
@@ -102,6 +103,7 @@ public class SettingActivity extends AppCompatActivity {
 
                 String plant_name = et_plantName.getText().toString();
                 String plant_info = et_plantInfo.getText().toString();
+                String plant_id = et_plantId.getText().toString();
 
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -123,7 +125,7 @@ public class SettingActivity extends AppCompatActivity {
                     }
                 };
                 // 서버로 Volley를 이용해서 요청을 함.
-                SettingRequest settingRequest = new SettingRequest(plant_name,plant_info,plant_owner, responseListener);
+                SettingRequest settingRequest = new SettingRequest(plant_id, plant_name,plant_info,plant_owner, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(SettingActivity.this);
                 queue.add(settingRequest);
 

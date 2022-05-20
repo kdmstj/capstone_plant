@@ -58,7 +58,6 @@ public class LoginActivity extends AppCompatActivity {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
                         boolean success = jsonObject.getBoolean("success");
-                        plant_id = String.valueOf(jsonObject.getInt("plant_id"));
                         if (success) { // 로그인에 성공한 경우
                             Toast.makeText(getApplicationContext(),"로그인에 성공하였습니다.",Toast.LENGTH_SHORT).show();
 

@@ -2,6 +2,8 @@ package com.example.capston_plant;
 
 import static android.content.ContentValues.TAG;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -34,6 +36,8 @@ public class HomeFragment extends Fragment {
     String HUMID;
     String SOIL;
     String TANK;
+    String plant_owner;
+    String plant_ID;
 
     TextView tv_plantName;
     TextView tv_temp;
@@ -48,6 +52,13 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //SharedPreferences 에서 정보 가져오기
+        SharedPreferences auto = getActivity().getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
+        plant_owner = auto.getString("user_id",null);
+        plant_ID = auto.getString("plant_id",null);
+        System.out.println("plant_owner home"+plant_owner);
+        System.out.println("plant_id home"+plant_ID);
 
 
     }
@@ -94,9 +105,14 @@ public class HomeFragment extends Fragment {
         @Override
         protected String doInBackground(String... params) {
 
+            //plant_ID = (String)params[1];
+            //plant_owner = (String)params[2];
+
             //서버에 있는  PHP 파일을 실행시키고 응답을 저장하고 스트링으로 변환하여  리턴한다.
             //POST 방식으로 데이터 전달시에는 데이터가 주소에 직접 입력되지 않는다.
-            String serverURL = params[0];
+            String serverURL = (String)params[0];
+
+            String postParameters = "plant_ID="+plant_ID+"&plant_owner="+plant_owner;
             String get_json = "";
 
             //HTTP 메시지 본문에 포함되어 전송되기 때문에 따로 데이터를 준비해야 한다.
@@ -109,9 +125,20 @@ public class HomeFragment extends Fragment {
                 URL url = new URL(serverURL);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
+                conn.setReadTimeout(5000); //5초안에 응답이 오지 않으면 예외가 발생한다.
+                conn.setConnectTimeout(5000);   //5초안에 연결이 안되면 예외가 발생한다.
+                conn.setRequestMethod("POST"); //요청 방식을 POST로 한다.
+                conn.connect();
+
+                OutputStream outputStream = conn.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8")); //전송할 데이터가 저장된 변수를 이곳에 입력한다. 인코딩을 고려해줘야 한다.
+                outputStream.flush();
+                outputStream.close();
+
                 if (conn != null) {
                     conn.setConnectTimeout(20000);
                     conn.setUseCaches(false);
+                    //응답을 읽는다.
                     if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
                         // 서버에서 읽어오기 위한 스트림 객체
                         InputStreamReader isr = new InputStreamReader(
@@ -154,8 +181,7 @@ public class HomeFragment extends Fragment {
                 JSONObject jsonObject = new JSONObject(result);
                 JSONArray  jsonArray = jsonObject.getJSONArray("sensor");
                 JSONObject item = jsonArray.getJSONObject(0);
-                //JSONArray array = new JSONObject(result).getJSONArray(url);
-                //JSONObject jsonObject = array.getJSONObject(0);
+
                 if(jsonArray != null){
                     plant_name = item.optString("plant_name","text on no value");
                     TEMP = item.optString("TEMP","text on no value");

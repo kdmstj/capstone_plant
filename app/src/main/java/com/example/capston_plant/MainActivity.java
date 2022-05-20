@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     SettingFragment settingFragment;
 
     String plant_owner;
+    String plant_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +36,11 @@ public class MainActivity extends AppCompatActivity {
         //SharedPreferences 에서 정보 가져오기
         SharedPreferences auto = getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
         plant_owner = auto.getString("user_id",null);
+        plant_id = auto.getString("plant_id",null);
         System.out.println("plant_owner"+plant_owner);
+        System.out.println("plant_id"+plant_id);
 
-        //Intent intent = getIntent();
-        //String plant_owner = intent.getStringExtra("plant_owner");
+
 
 
         //초기 세팅

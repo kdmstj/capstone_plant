@@ -2,7 +2,9 @@ package com.example.capston_plant;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -61,6 +63,15 @@ public class RegisterActivity extends AppCompatActivity {
                             boolean success = jsonObject.getBoolean("success");
                             if (success) { // 회원등록에 성공한 경우
                                 Toast.makeText(getApplicationContext(),"회원 등록에 성공하였습니다.",Toast.LENGTH_SHORT).show();
+                                SharedPreferences auto = getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
+                                SharedPreferences.Editor autoLoginEdit = auto.edit();
+
+                                autoLoginEdit.putString("user_id", user_id);
+                                autoLoginEdit.putString("user_pw", user_pw);
+
+                                autoLoginEdit.commit();
+
+
                                 Intent intent = new Intent(RegisterActivity.this, SettingActivity.class);
                                 startActivity(intent);
                             } else { // 회원등록에 실패한 경우

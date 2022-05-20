@@ -40,6 +40,8 @@ public class SettingFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_setting, container, false);
 
 
+
+
         btn_goBack = view.findViewById(R.id.btn_goBack);
         btn_goBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +68,8 @@ public class SettingFragment extends Fragment {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.clear();
                 editor.commit();
+
+
 
             }
         });

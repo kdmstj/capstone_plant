@@ -58,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
                         boolean success = jsonObject.getBoolean("success");
+                        plant_id = String.valueOf(jsonObject.getInt("plant_id"));
                         if (success) { // 로그인에 성공한 경우
                             Toast.makeText(getApplicationContext(),"로그인에 성공하였습니다.",Toast.LENGTH_SHORT).show();
 
@@ -65,13 +66,12 @@ public class LoginActivity extends AppCompatActivity {
                             SharedPreferences.Editor autoLoginEdit = auto.edit();
 
                             autoLoginEdit.putString("user_id", user_id);
-                            autoLoginEdit.putString("user_pw", user_pw);
+
 
                             autoLoginEdit.commit();
                             Toast.makeText(getApplicationContext(), user_id+"님 환영합니다.",Toast.LENGTH_SHORT).show();
                             //check_setting();
                             Intent intent4 = new Intent(LoginActivity.this, SettingActivity.class);
-                            intent4.putExtra("plant_owner",user_id);
                             startActivity(intent4);
                             finish();
 
@@ -109,16 +109,5 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void check_setting(){
-        if(plant_id.equals(null)){
-            Intent intent4 = new Intent(LoginActivity.this, SettingActivity.class);
-            startActivity(intent4);
-            finish();
 
-        }else{
-            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
-    }
 }

@@ -1,13 +1,10 @@
 package com.example.capston_plant;
 
-import static android.content.ContentValues.TAG;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,23 +12,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
+
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 public class SettingActivity extends AppCompatActivity {
 
@@ -40,6 +27,7 @@ public class SettingActivity extends AppCompatActivity {
     EditText et_plantName;
     EditText et_plantInfo;
     String plant_owner;
+    String plant_ID;
 
 
 
@@ -54,7 +42,6 @@ public class SettingActivity extends AppCompatActivity {
         //SharedPreferences 에서 정보 가져오기
         SharedPreferences auto = getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
         plant_owner = auto.getString("user_id",null);
-        System.out.println("plant_owner"+plant_owner);
 
         Response.Listener<String> responseListener2 = new Response.Listener<String>() {
             @Override
@@ -62,15 +49,22 @@ public class SettingActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     boolean success = jsonObject.getBoolean("success");
-                    Log.d("성공유무", String.valueOf(success));
+                    String plant_ID = jsonObject.getString("plant_ID");
                     if (success) { // 정보가 없는 경우 true
-                        Log.d("데이터 유무:","데이터가 없습니다.");
 
 
                     } else {//정보가 있는 경우 false
 
+                        SharedPreferences auto = getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
+                        SharedPreferences.Editor autoLoginEdit = auto.edit();
+
+                        autoLoginEdit.putString("plant_owner", plant_owner);
+                        autoLoginEdit.putString("plant_id", plant_ID);
+
+                        autoLoginEdit.commit();
+
+
                         Intent intent = new Intent(SettingActivity.this,MainActivity.class);
-                        intent.putExtra("plant_owner",plant_owner);
                         startActivity(intent);
 
 
@@ -112,10 +106,19 @@ public class SettingActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             boolean success = jsonObject.getBoolean("success");
+                            String plant_ID = jsonObject.getString("plant_ID");
                             if(success){
                                 Toast.makeText(getApplicationContext(), "식물 정보 등록에 성공하였습니다.",Toast.LENGTH_SHORT).show();
+
+                                SharedPreferences auto = getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
+                                SharedPreferences.Editor autoLoginEdit = auto.edit();
+
+                                autoLoginEdit.putString("plant_owner", plant_owner);
+                                autoLoginEdit.putString("plant_id", plant_ID);
+
+                                autoLoginEdit.commit();
+
                                 Intent intent = new Intent(SettingActivity.this,MainActivity.class);
-                                intent.putExtra("plant_owner",plant_owner);
                                 startActivity(intent);
 
                             }

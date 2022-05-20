@@ -14,19 +14,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class HomeFragment extends Fragment {
@@ -135,14 +132,21 @@ public class HomeFragment extends Fragment {
                 outputStream.flush();
                 outputStream.close();
 
+                int responseStatusCode = conn.getResponseCode();
+                Log.d(TAG, "POST response code - " + responseStatusCode);
+
+                InputStream inputStream;
+
                 if (conn != null) {
-                    conn.setConnectTimeout(20000);
-                    conn.setUseCaches(false);
                     //응답을 읽는다.
+
+                    //정상적인 응답 데이터
                     if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
                         // 서버에서 읽어오기 위한 스트림 객체
-                        InputStreamReader isr = new InputStreamReader(
-                                conn.getInputStream());
+                        //정상적인 응답 데이터
+                        inputStream = conn.getInputStream();
+
+                        InputStreamReader isr = new InputStreamReader(inputStream,"UTF-8");
                         // 줄단위로 읽어오기 위해 BufferReader로 감싼다.
                         BufferedReader br = new BufferedReader(isr);
                         // 반복문 돌면서읽어오기
@@ -155,6 +159,9 @@ public class HomeFragment extends Fragment {
                         }
                         br.close();
                         conn.disconnect();
+                    }else{
+                        //에러 발생
+                        inputStream = conn.getErrorStream();
                     }
                 }
                 get_json = Buffer.toString();
@@ -183,7 +190,7 @@ public class HomeFragment extends Fragment {
                 JSONObject item = jsonArray.getJSONObject(0);
 
                 if(jsonArray != null){
-                    plant_name = item.optString("plant_name","text on no value");
+                    plant_name = item.optString("PLANT_NAME","text on no value");
                     TEMP = item.optString("TEMP","text on no value");
                     HUMID = item.optString("HUMID","text on no value");
                     SOIL = item.optString("SOIL","text on no value");

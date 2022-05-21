@@ -23,30 +23,28 @@ public class Splash extends AppCompatActivity {
 
         SharedPreferences auto = getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
         user_id = auto.getString("user_id",null);
-        user_pw = auto.getString("user_pw", null);
+        System.out.println(user_id);
+
 
 
 
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
+        handler.postDelayed(() -> {
 
-                if(user_id != null && user_pw != null){//기존에 로그인을 했을 경우 자동 로그인으로 넘어간다.
-                    Toast.makeText(getApplicationContext(),user_id+"님 자동로그인 입니다!",Toast.LENGTH_SHORT).show();
-                    Intent intent4 = new Intent(Splash.this, SettingActivity.class);
-                    intent4.putExtra("plant_owner",user_id);
-                    startActivity(intent4);
-                    finish();
+            if(user_id != null ){//기존에 로그인을 했을 경우 자동 로그인으로 넘어간다.
+                Toast.makeText(getApplicationContext(),user_id+"님 자동로그인 입니다!",Toast.LENGTH_SHORT).show();
+                Intent intent4 = new Intent(Splash.this, SettingActivity.class);
+                intent4.putExtra("plant_owner",user_id);
+                startActivity(intent4);
+                finish();
 
 
-                }else if(user_id == null && user_pw == null){
-                    Intent intent = new Intent(getApplicationContext(), StartActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-
+            }else if(user_id == null ){
+                Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+                startActivity(intent);
+                finish();
             }
+
         },3000);
     }
 

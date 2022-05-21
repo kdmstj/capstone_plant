@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 
@@ -56,6 +57,8 @@ public class HomeFragment extends Fragment {
         plant_ID = auto.getString("plant_id",null);
         System.out.println("plant_owner home"+plant_owner);
         System.out.println("plant_id home"+plant_ID);
+
+
 
 
     }

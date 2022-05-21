@@ -298,7 +298,7 @@
         app:layout_constraintTop_toTopOf="@+id/imageView16" />
 
     <ImageButton
-        android:id="@+id/imageButton4"
+        android:id="@+id/btn_led"
         android:layout_width="64dp"
         android:layout_height="62dp"
         android:background="#FFFFFF"
@@ -323,12 +323,11 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton4"
+        app:layout_constraintEnd_toEndOf="@+id/btn_led"
         app:layout_constraintHorizontal_bias="0.441"
-        app:layout_constraintStart_toStartOf="@+id/imageButton4"
-        app:layout_constraintTop_toTopOf="@+id/imageButton4"
+        app:layout_constraintStart_toStartOf="@+id/btn_led"
+        app:layout_constraintTop_toTopOf="@+id/btn_led"
         app:srcCompat="@drawable/ledbutton" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

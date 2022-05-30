@@ -27,7 +27,6 @@ public class SettingActivity extends AppCompatActivity {
     EditText et_plantName;
     EditText et_plantInfo;
     String plant_owner;
-    String plant_ID;
 
 
 
@@ -59,7 +58,7 @@ public class SettingActivity extends AppCompatActivity {
                         SharedPreferences.Editor autoLoginEdit = auto.edit();
 
                         autoLoginEdit.putString("plant_owner", plant_owner);
-                        autoLoginEdit.putString("plant_id", plant_ID);
+                        autoLoginEdit.putString("plant_ID", plant_ID);
 
                         autoLoginEdit.commit();
 
@@ -106,7 +105,9 @@ public class SettingActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             boolean success = jsonObject.getBoolean("success");
-                            String plant_ID = jsonObject.getString("plant_ID");
+                            String plant_ID = jsonObject.getString("plant_id");
+                            System.out.print("success"+success);
+                            System.out.print("plant_id"+plant_ID);
                             if(success){
                                 Toast.makeText(getApplicationContext(), "식물 정보 등록에 성공하였습니다.",Toast.LENGTH_SHORT).show();
 
@@ -114,7 +115,7 @@ public class SettingActivity extends AppCompatActivity {
                                 SharedPreferences.Editor autoLoginEdit = auto.edit();
 
                                 autoLoginEdit.putString("plant_owner", plant_owner);
-                                autoLoginEdit.putString("plant_id", plant_ID);
+                                autoLoginEdit.putString("plant_ID", plant_ID);
 
                                 autoLoginEdit.commit();
 

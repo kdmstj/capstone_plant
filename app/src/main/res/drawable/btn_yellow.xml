@@ -3,7 +3,7 @@
     android:padding="10dp"
     android:shape="rectangle" >
     <!--배경-->
-    <solid android:color ="#F4F4F4"/>
+    <solid android:color ="#F9EDC6"/>
     <!--테두리-->
     <corners
         android:bottomLeftRadius="30dp"

@@ -43,6 +43,8 @@ public class HomeFragment extends Fragment {
     TextView tv_soil;
     TextView tv_tank;
 
+    ImageButton btn_Led;
+    ImageButton btn_moodLed;
     final static private String url = "http://112.170.208.72:8920/sensorinfo.php";
 
 
@@ -57,6 +59,8 @@ public class HomeFragment extends Fragment {
         plant_ID = auto.getString("plant_id",null);
         System.out.println("plant_owner home"+plant_owner);
         System.out.println("plant_id home"+plant_ID);
+
+
 
 
 
@@ -82,6 +86,22 @@ public class HomeFragment extends Fragment {
         tv_soil = v.findViewById(R.id.tv_soil);
         tv_tank = v.findViewById(R.id.tv_tank);
 
+        btn_Led = v.findViewById(R.id.btn_led);
+        btn_moodLed = v.findViewById(R.id.btn_moodled);
+
+        btn_Led.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        btn_moodLed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
 
 
@@ -169,6 +189,7 @@ public class HomeFragment extends Fragment {
                 }
                 get_json = Buffer.toString();
                 Log.d(TAG, "get_json: " + get_json);
+                Thread.sleep(5);
 
 
 
@@ -179,13 +200,12 @@ public class HomeFragment extends Fragment {
         }
 
 
+
+
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             Log.d(TAG, " <<<<<onPostExecute>>>> ");
-
-
-
 
             try {
                 JSONObject jsonObject = new JSONObject(result);
@@ -213,6 +233,11 @@ public class HomeFragment extends Fragment {
             } catch (Exception e) {
                 Log.d(TAG, "showResult : ", e);
             }
+
+
+
+
+
         }
     }
 }

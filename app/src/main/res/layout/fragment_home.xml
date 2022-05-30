@@ -21,7 +21,7 @@
         android:layout_width="160dp"
         android:layout_height="70dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="246dp"
+        android:layout_marginTop="236dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:srcCompat="@drawable/round_grey" />
@@ -64,7 +64,7 @@
         android:id="@+id/imageView4"
         android:layout_width="160dp"
         android:layout_height="70dp"
-        android:layout_marginTop="247dp"
+        android:layout_marginTop="236dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
@@ -254,17 +254,30 @@
         android:layout_width="124dp"
         android:layout_height="124dp"
         android:layout_marginStart="120dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="72dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:srcCompat="@drawable/circle_green" />
+
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="TextView"
+        android:textColor="#465730"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView16"
+        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintStart_toStartOf="@+id/imageView16"
+        app:layout_constraintTop_toTopOf="@+id/imageView16" />
 
     <ImageView
         android:id="@+id/imageView15"
         android:layout_width="124dp"
         android:layout_height="124dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:srcCompat="@drawable/circle_white50" />
@@ -279,55 +292,66 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView15"
         app:layout_constraintEnd_toEndOf="@+id/imageView15"
-        app:layout_constraintHorizontal_bias="0.422"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="@+id/imageView15"
         app:layout_constraintTop_toTopOf="@+id/imageView15"
-        app:layout_constraintVertical_bias="0.546" />
-
-    <TextView
-        android:id="@+id/tv_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="TextView"
-        android:textColor="#465730"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView16"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/imageView16"
-        app:layout_constraintTop_toTopOf="@+id/imageView16" />
-
-    <ImageButton
-        android:id="@+id/btn_led"
-        android:layout_width="64dp"
-        android:layout_height="62dp"
-        android:background="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.112"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView15"
-        app:srcCompat="@drawable/circle_yellow" />
+        app:layout_constraintVertical_bias="0.578" />
 
     <ImageView
         android:id="@+id/imageView17"
         android:layout_width="110dp"
         android:layout_height="220dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.578"
         app:layout_constraintStart_toEndOf="@+id/imageView16"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:srcCompat="@drawable/plant" />
 
-    <ImageView
-        android:id="@+id/imageView18"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="12dp"
+    <ImageButton
+        android:id="@+id/btn_led"
+        android:layout_width="160dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:padding="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:srcCompat="@drawable/round_yellow" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Turn on LED"
+        android:textColor="#656665"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_led"
         app:layout_constraintEnd_toEndOf="@+id/btn_led"
-        app:layout_constraintHorizontal_bias="0.441"
         app:layout_constraintStart_toStartOf="@+id/btn_led"
-        app:layout_constraintTop_toTopOf="@+id/btn_led"
-        app:srcCompat="@drawable/ledbutton" />
+        app:layout_constraintTop_toTopOf="@+id/btn_led" />
+
+    <ImageButton
+        android:id="@+id/btn_moodled"
+        android:layout_width="160dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:padding="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6"
+        app:srcCompat="@drawable/round_yellow" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Turn on MOOD"
+        android:textColor="#656665"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_moodled"
+        app:layout_constraintEnd_toEndOf="@+id/btn_moodled"
+        app:layout_constraintStart_toStartOf="@+id/btn_moodled"
+        app:layout_constraintTop_toTopOf="@+id/btn_moodled" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

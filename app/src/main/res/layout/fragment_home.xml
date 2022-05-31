@@ -21,7 +21,7 @@
         android:layout_width="160dp"
         android:layout_height="70dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="236dp"
+        android:layout_marginTop="204dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:srcCompat="@drawable/round_grey" />
@@ -64,7 +64,7 @@
         android:id="@+id/imageView4"
         android:layout_width="160dp"
         android:layout_height="70dp"
-        android:layout_marginTop="236dp"
+        android:layout_marginTop="204dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
@@ -113,6 +113,16 @@
         android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:srcCompat="@drawable/round_grey" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="360dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
         app:srcCompat="@drawable/round_grey" />
 
     <ImageView
@@ -301,26 +311,27 @@
         android:id="@+id/imageView17"
         android:layout_width="110dp"
         android:layout_height="220dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.578"
         app:layout_constraintStart_toEndOf="@+id/imageView16"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/plant" />
+
 
     <ImageButton
         android:id="@+id/btn_led"
-        android:layout_width="160dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="212dp"
+        android:layout_marginTop="30dp"
         android:padding="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5"
         app:srcCompat="@drawable/round_yellow" />
 
-
     <TextView
+        android:id="@+id/tv_btnLed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Turn on LED"
@@ -331,27 +342,29 @@
         app:layout_constraintStart_toStartOf="@+id/btn_led"
         app:layout_constraintTop_toTopOf="@+id/btn_led" />
 
-    <ImageButton
-        android:id="@+id/btn_moodled"
-        android:layout_width="160dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:padding="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6"
-        app:srcCompat="@drawable/round_yellow" />
-
     <TextView
+        android:id="@+id/tv_led2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Turn on MOOD"
+        android:layout_marginTop="15dp"
+        android:text="현재 LED 상태"
         android:textColor="#656665"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_moodled"
-        app:layout_constraintEnd_toEndOf="@+id/btn_moodled"
-        app:layout_constraintStart_toStartOf="@+id/btn_moodled"
-        app:layout_constraintTop_toTopOf="@+id/btn_moodled" />
+        app:layout_constraintEnd_toStartOf="@+id/btn_led"
+        app:layout_constraintHorizontal_bias="0.465"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/tv_led"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="OFF 상태입니다."
+        android:textColor="#656665"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_led2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_led2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

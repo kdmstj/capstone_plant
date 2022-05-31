@@ -17,7 +17,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -36,15 +41,17 @@ public class HomeFragment extends Fragment {
     String TANK;
     String plant_owner;
     String plant_ID;
+    Integer btn_led = 0;
 
     TextView tv_plantName;
     TextView tv_temp;
     TextView tv_humid;
     TextView tv_soil;
     TextView tv_tank;
+    TextView tv_btnLed;
+    TextView tv_led;
 
     ImageButton btn_Led;
-    ImageButton btn_moodLed;
     final static private String url = "http://112.170.208.72:8920/sensorinfo.php";
 
 
@@ -56,7 +63,7 @@ public class HomeFragment extends Fragment {
         //SharedPreferences 에서 정보 가져오기
         SharedPreferences auto = getActivity().getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
         plant_owner = auto.getString("user_id",null);
-        plant_ID = auto.getString("plant_id",null);
+        plant_ID = auto.getString("plant_ID",null);
         System.out.println("plant_owner home"+plant_owner);
         System.out.println("plant_id home"+plant_ID);
 
@@ -87,21 +94,70 @@ public class HomeFragment extends Fragment {
         tv_tank = v.findViewById(R.id.tv_tank);
 
         btn_Led = v.findViewById(R.id.btn_led);
-        btn_moodLed = v.findViewById(R.id.btn_moodled);
+        tv_btnLed = v.findViewById(R.id.tv_btnLed);
+        tv_led = v.findViewById(R.id.tv_led);
+
 
         btn_Led.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                System.out.print("btn_led = " + btn_led);
+
+
+                btn_led++;
+                if(btn_led == 3){
+                    btn_led = 0;
+                }
+
+                if(btn_led == 0){
+                    tv_btnLed.setText("Turn On LED");
+                    tv_led.setText("OFF 상태입니다.");
+                    //OFF == 0
+                }else if(btn_led == 1){
+                    //ON == 1
+                    tv_btnLed.setText("Turn On MooD");
+                    tv_led.setText("ON 상태입니다.");
+                }else if(btn_led == 2){
+                    tv_btnLed.setText("Turn Off LED");
+                    tv_led.setText("MOOD 상태입니다.");
+                    //MOOD = 2
+                }
+
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            boolean success = jsonObject.getBoolean("success");
+                            if(success){
+
+                            }else{
+                                return;
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                };
+                // 서버로 Volley를 이용해서 요청을 함.
+
+                LEDRequest ledRequest = new LEDRequest(String.valueOf(btn_led),plant_ID, responseListener);
+                RequestQueue queue = Volley.newRequestQueue(getActivity());
+                queue.add(ledRequest);
+
+
+
+
+
+
 
             }
         });
 
-        btn_moodLed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
+
+
 
 
 
@@ -109,6 +165,8 @@ public class HomeFragment extends Fragment {
         return v;
 
     }
+
+
 
     private class GetData extends AsyncTask<String, Void, String>{
 
@@ -198,6 +256,15 @@ public class HomeFragment extends Fragment {
             }
             return get_json;
         }
+
+
+        protected void onProgressUpdate(Integer ... values) {
+
+
+        }
+
+
+
 
 
 

@@ -12,7 +12,7 @@ import android.widget.Toast;
 public class Splash extends AppCompatActivity {
 
     String user_id;
-    String user_pw;
+    String plant_ID;
 
 
     @Override
@@ -23,7 +23,10 @@ public class Splash extends AppCompatActivity {
 
         SharedPreferences auto = getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
         user_id = auto.getString("user_id",null);
-        System.out.println(user_id);
+        plant_ID = auto.getString("plant_ID", null);
+
+        System.out.println("splash user_id" +user_id);
+        System.out.println("splash plant_ID" +plant_ID);
 
 
 

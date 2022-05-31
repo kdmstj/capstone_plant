@@ -60,6 +60,9 @@ public class SettingActivity extends AppCompatActivity {
                         autoLoginEdit.putString("plant_owner", plant_owner);
                         autoLoginEdit.putString("plant_ID", plant_ID);
 
+                        System.out.println("setting success"+success);
+                        System.out.println("setting plant_id"+plant_ID);
+
                         autoLoginEdit.commit();
 
 

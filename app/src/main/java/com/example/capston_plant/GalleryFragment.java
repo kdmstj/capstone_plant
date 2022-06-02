@@ -1,70 +1,58 @@
 package com.example.capston_plant;
 
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ImageButton;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link GalleryFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
+
 public class GalleryFragment extends Fragment {
 
     private View view;
     private ImageButton btn_goBack;
+    private GridView gridView;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    SingerAdapter singerAdapter;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public GalleryFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment GalleryFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static GalleryFragment newInstance(String param1, String param2) {
-        GalleryFragment fragment = new GalleryFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_gallery, container, false);
+
+        gridView = view.findViewById(R.id.GridView);
+        singerAdapter = new SingerAdapter();
+        singerAdapter.addItem(new SingerItem(R.drawable.gallery_image_01));
+        singerAdapter.addItem(new SingerItem(R.drawable.gallery_image_02));
+        singerAdapter.addItem(new SingerItem(R.drawable.gallery_image_03));
+        singerAdapter.addItem(new SingerItem(R.drawable.gallery_image_04));
+
+        gridView.setAdapter(singerAdapter);
+
+
         btn_goBack = view.findViewById(R.id.btn_goBack);
         btn_goBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +63,41 @@ public class GalleryFragment extends Fragment {
                 transaction.commit();
             }
         });
+
+
         return view;
+
     }
+
+    class SingerAdapter extends BaseAdapter {
+        ArrayList<SingerItem> items = new ArrayList<SingerItem>();
+        @Override
+        public int getCount() {
+            return items.size();
+        }
+
+        public void addItem(SingerItem singerItem){
+            items.add(singerItem);
+        }
+
+        @Override
+        public SingerItem getItem(int i) {
+            return items.get(i);
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return i;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            SingerViewer singerViewer = new SingerViewer(getActivity());
+            singerViewer.setItem(items.get(i));
+            return singerViewer;
+        }
+    }
+
+
+
 }

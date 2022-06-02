@@ -59,10 +59,6 @@ public class HomeFragment extends Fragment {
     ImageButton btn_Led;
     final static private String url = "http://112.170.208.72:8920/sensorinfo.php";
 
-    Handler handler1 = null;
-
-
-
 
 
     @Override
@@ -75,20 +71,13 @@ public class HomeFragment extends Fragment {
         plant_ID = auto.getString("plant_ID",null);
         System.out.println("plant_owner home"+plant_owner);
         System.out.println("plant_id home"+plant_ID);
-
-
-
-
-
-
     }
+
+
 
     //onCreateView 는 레이아웃을 inflate 하는 메소드, view 객체를 얻을 수 있어, view 와 관련된 객체를 생성한다.
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-
-
 
         //GetData 클래스 task 객체 생성
         GetData task = new GetData();

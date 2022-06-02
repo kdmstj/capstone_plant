@@ -3,9 +3,7 @@ package com.example.capston_plant;
 import static android.content.ContentValues.TAG;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -16,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
@@ -28,8 +27,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
+
 
 public class MonitoringFragment extends Fragment {
 
@@ -68,6 +67,7 @@ public class MonitoringFragment extends Fragment {
         }
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -76,13 +76,22 @@ public class MonitoringFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_monitoring, container, false);
 
-        //GetData 클래스 task 객체 생성
-        MonitoringFragment.GetData task = new MonitoringFragment.GetData();
-        task.execute(url);
+
 
         //webView 선언
         webView = view.findViewById(R.id.webView);
         webView.setWebViewClient(new MyWeb());
+
+
+        WebSettings webSettings=webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setSupportZoom(true);
+
+
+        webView.loadUrl("http://112.170.208.72:9000");
 
         //뒤로가기 버튼 구현
         btn_goBack = view.findViewById(R.id.btn_goBack);
@@ -100,140 +109,4 @@ public class MonitoringFragment extends Fragment {
         return view;
     }
 
-
-
-    private class GetData extends AsyncTask<String, String, String> {
-        //params , progress , result
-        //Params : doInBackground() 함수의 파라미터로 쓰인다. 사용자가 execute(Params) 함수를 호출하면서 넘기는 파라미터이다.
-        //
-        //Progress : onProgressUpdate() 함수의 파라미터로 쓰인다.
-        //
-        //Result : doInBackground() 백그라운드에서 계산한 결과의 반환값의 유형을 정의한다. onPostExecute() 의 파라미터로 사용된다. 그러니까 doInBackground() 의 반환값을 onPostExecute() 파라미터로 받는 것이다.
-
-        StringBuffer Buffer = new StringBuffer();
-
-        @Override
-        protected void onPreExecute(){
-            super.onPreExecute();
-
-        }
-
-
-        //백그라운드에서 발생하는 코드
-        @Override
-        protected String doInBackground(String... params) {
-
-
-
-            //서버에 있는  PHP 파일을 실행시키고 응답을 저장하고 스트링으로 변환하여  리턴한다.
-            //POST 방식으로 데이터 전달시에는 데이터가 주소에 직접 입력되지 않는다.
-            String serverURL = (String)params[0];
-
-            String postParameters = "plant_ID="+plant_ID;
-            String get_json = "";
-
-            //HTTP 메시지 본문에 포함되어 전송되기 때문에 따로 데이터를 준비해야 한다.
-            //전송할 데이터는 “이름=값” 형식이며 여러 개를 보내야 할 경우에는 항목 사이에 &를 추가합니다.
-            //여기에 적어준 이름을 나중에 PHP 에서 사용하여 값을 얻게 됩니다.
-
-
-            try {
-                // HttpURLConnection 클래스를 사용하여 POST 방식으로 데이터를 전송합니다.
-                URL url = new URL(serverURL);
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-                conn.setReadTimeout(5000); //5초안에 응답이 오지 않으면 예외가 발생한다.
-                conn.setConnectTimeout(5000);   //5초안에 연결이 안되면 예외가 발생한다.
-                conn.setRequestMethod("POST"); //요청 방식을 POST로 한다.
-                conn.connect();
-
-                OutputStream outputStream = conn.getOutputStream();
-                outputStream.write(postParameters.getBytes("UTF-8")); //전송할 데이터가 저장된 변수를 이곳에 입력한다. 인코딩을 고려해줘야 한다.
-                outputStream.flush();
-                outputStream.close();
-
-                int responseStatusCode = conn.getResponseCode();
-                Log.d(TAG, "POST response code - " + responseStatusCode);
-
-                InputStream inputStream;
-
-                if (conn != null) {
-                    //응답을 읽는다.
-
-                    //정상적인 응답 데이터
-                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                        // 서버에서 읽어오기 위한 스트림 객체
-                        //정상적인 응답 데이터
-                        inputStream = conn.getInputStream();
-
-                        InputStreamReader isr = new InputStreamReader(inputStream,"UTF-8");
-                        // 줄단위로 읽어오기 위해 BufferReader로 감싼다.
-                        BufferedReader br = new BufferedReader(isr);
-                        // 반복문 돌면서읽어오기
-                        while (true) {
-                            String line = br.readLine();
-                            if (line == null) {
-                                break;
-                            }
-                            Buffer.append(line);
-                        }
-                        br.close();
-                        conn.disconnect();
-                    }else{
-                        //에러 발생
-                        inputStream = conn.getErrorStream();
-                    }
-                }
-                get_json = Buffer.toString();
-                Log.d(TAG, "get_json: " + get_json);
-                Thread.sleep(10);
-
-
-
-            } catch (Exception e) {
-                Log.e("에러 ", e.getMessage());
-            }
-            return get_json;
-
-
-        }
-
-
-
-
-
-
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-
-            Log.d(TAG, " <<<<<onPostExecute>>>> ");
-
-            try {
-                JSONObject jsonObject = new JSONObject(result);
-                JSONArray jsonArray = jsonObject.getJSONArray("sensor");
-                JSONObject item = jsonArray.getJSONObject(0);
-
-                if(jsonArray != null){
-
-                    String SAVE_PATH = item.optString("SAVE_PATH","text on no value");
-                    webView.loadUrl(SAVE_PATH);
-
-                }else{
-                    System.out.println("nononono");
-                }
-
-
-            } catch (Exception e) {
-                Log.d(TAG, "showResult : ", e);
-            }
-
-
-
-
-
-
-        }
-    }
 }

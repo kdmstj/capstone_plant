@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:text="가제"
+        android:text="KnnA"
         android:textColor="#465730"
         android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"

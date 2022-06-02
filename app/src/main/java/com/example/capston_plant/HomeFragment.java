@@ -8,7 +8,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +33,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class HomeFragment extends Fragment {
 
@@ -53,6 +58,10 @@ public class HomeFragment extends Fragment {
 
     ImageButton btn_Led;
     final static private String url = "http://112.170.208.72:8920/sensorinfo.php";
+
+    Handler handler1 = null;
+
+
 
 
 
@@ -79,6 +88,8 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 
+
+
         //GetData 클래스 task 객체 생성
         GetData task = new GetData();
         task.execute(url);
@@ -98,10 +109,13 @@ public class HomeFragment extends Fragment {
         tv_led = v.findViewById(R.id.tv_led);
 
 
+
+
+
         btn_Led.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.print("btn_led = " + btn_led);
+                System.out.println("btn_led = " + btn_led);
 
 
                 btn_led++;
@@ -123,6 +137,7 @@ public class HomeFragment extends Fragment {
                     //MOOD = 2
                 }
 
+
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
 
                     public void onResponse(String response) {
@@ -130,6 +145,7 @@ public class HomeFragment extends Fragment {
                             JSONObject jsonObject = new JSONObject(response);
                             boolean success = jsonObject.getBoolean("success");
                             if(success){
+                                System.out.println("성공적으로 btn_led 수정함.");
 
                             }else{
                                 return;
@@ -166,9 +182,19 @@ public class HomeFragment extends Fragment {
 
     }
 
+    private void refresh(){
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.detach(this).attach(this).commit();
+    }
 
 
-    private class GetData extends AsyncTask<String, Void, String>{
+    private class GetData extends AsyncTask<String, String, String>{
+        //params , progress , result
+        //Params : doInBackground() 함수의 파라미터로 쓰인다. 사용자가 execute(Params) 함수를 호출하면서 넘기는 파라미터이다.
+        //
+        //Progress : onProgressUpdate() 함수의 파라미터로 쓰인다.
+        //
+        //Result : doInBackground() 백그라운드에서 계산한 결과의 반환값의 유형을 정의한다. onPostExecute() 의 파라미터로 사용된다. 그러니까 doInBackground() 의 반환값을 onPostExecute() 파라미터로 받는 것이다.
 
         StringBuffer Buffer = new StringBuffer();
 
@@ -183,8 +209,7 @@ public class HomeFragment extends Fragment {
         @Override
         protected String doInBackground(String... params) {
 
-            //plant_ID = (String)params[1];
-            //plant_owner = (String)params[2];
+
 
             //서버에 있는  PHP 파일을 실행시키고 응답을 저장하고 스트링으로 변환하여  리턴한다.
             //POST 방식으로 데이터 전달시에는 데이터가 주소에 직접 입력되지 않는다.
@@ -247,7 +272,7 @@ public class HomeFragment extends Fragment {
                 }
                 get_json = Buffer.toString();
                 Log.d(TAG, "get_json: " + get_json);
-                Thread.sleep(5);
+                Thread.sleep(10);
 
 
 
@@ -255,10 +280,6 @@ public class HomeFragment extends Fragment {
                 Log.e("에러 ", e.getMessage());
             }
             return get_json;
-        }
-
-
-        protected void onProgressUpdate(Integer ... values) {
 
 
         }
@@ -272,7 +293,8 @@ public class HomeFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Log.d(TAG, " <<<<<onPostExecute>>>> ");
+
+            Log.d(TAG, " <<<<<onProgressUpdate>>>> ");
 
             try {
                 JSONObject jsonObject = new JSONObject(result);
@@ -300,6 +322,7 @@ public class HomeFragment extends Fragment {
             } catch (Exception e) {
                 Log.d(TAG, "showResult : ", e);
             }
+
 
 
 
